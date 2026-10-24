@@ -15,7 +15,9 @@ export default function QueryProcessor(query: string): string {
     return "67";
   }
 
-
+  if (query.toLowerCase().includes("what is your andrew id")) {
+    return "bgisagew";
+  }
 
   return "";
 }
