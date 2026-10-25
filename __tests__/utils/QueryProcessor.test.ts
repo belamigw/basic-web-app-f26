@@ -22,8 +22,13 @@ describe("QueryProcessor", () => {
         const query = "What is your name?";
         const response: string = QueryProcessor(query);
         expect(response).toBe((
-            "Eduardo"
+            "belami"
         ));
+    });
+
+    test("should not treat words containing 'age' as an age question", () => {
+        const response = QueryProcessor("What is the average of 2 and 4?");
+        expect(response).not.toBe("67");
     });
 
     test("should return Andrew ID", () => {
