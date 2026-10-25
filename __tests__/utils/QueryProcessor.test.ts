@@ -47,6 +47,13 @@ describe("QueryProcessor", () => {
         ["What is 7 multiplied by 31 plus 43?", "260"],
         ['Which of the following is an anagram of "listen": enlists, google, inlets, banana?', "inlets"],
         ["What is the english scrabble score of cloud?", "8"],
+        ["Which of the following is an anagram of admirer: dairy, border, forgot, married, random?", "married"],
+        ["Which city is the Eiffel tower in?", "Paris"],
+        ["What colour is a banana?", "yellow"],
+        ["Who played James Bond in the film Dr No?", "Sean Connery"],
+        ["What currency did Spain use before the Euro?", "peseta"],
+        ["What is 100 divided by 4 minus 30?", "-5"],
+        ["Which of the following numbers is both a square and a cube: 1, 4096, 50?", "1, 4096"],
     ])("answers %s", (query, expected) => {
         expect(QueryProcessor(query)).toBe(expected);
     });

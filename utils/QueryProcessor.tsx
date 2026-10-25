@@ -20,6 +20,12 @@ export default function QueryProcessor(query: string): string {
   }
 
   const q = query.toLowerCase();
+
+  const trivia = TRIVIA.find(([phrase]) => q.includes(phrase));
+  if (trivia) {
+    return trivia[1];
+  }
+
   const listed = (q.split(":")[1] || "").match(/-?\d+/g)?.map(Number) || [];
 
   if (q.includes("largest") && listed.length > 0) {
@@ -62,6 +68,14 @@ export default function QueryProcessor(query: string): string {
 
   return "";
 }
+
+const TRIVIA: [string, string][] = [
+  ["eiffel tower", "Paris"],
+  ["colour is a banana", "yellow"],
+  ["color is a banana", "yellow"],
+  ["james bond in the film dr no", "Sean Connery"],
+  ["spain use before the euro", "peseta"],
+];
 
 const SCRABBLE: Record<string, number> = {};
 const SCRABBLE_GROUPS: [string, number][] = [
