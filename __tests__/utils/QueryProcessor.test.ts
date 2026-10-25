@@ -43,6 +43,10 @@ describe("QueryProcessor", () => {
         ["Which of the following numbers is both a square and a cube: 64, 100, 729, 8?", "64, 729"],
         ["Which of the following numbers are primes: 2, 9, 13, 21, 97?", "2, 13, 97"],
         ["What is the 10th number in the Fibonacci sequence?", "55"],
+        ["What is 73 plus 89 multiplied by 58?", "5235"],
+        ["What is 7 multiplied by 31 plus 43?", "260"],
+        ['Which of the following is an anagram of "listen": enlists, google, inlets, banana?', "inlets"],
+        ["What is the english scrabble score of cloud?", "8"],
     ])("answers %s", (query, expected) => {
         expect(QueryProcessor(query)).toBe(expected);
     });

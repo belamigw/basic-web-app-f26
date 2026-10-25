@@ -38,6 +38,18 @@ export default function QueryProcessor(query: string): string {
     return listed.filter(isPrime).join(", ");
   }
 
+  const anagram = q.match(/anagram of "?([a-z]+)"?\s*:\s*(.*)/);
+  if (anagram) {
+    const sorted = (word: string) => word.split("").sort().join("");
+    const candidates = anagram[2].match(/[a-z]+/g) || [];
+    return candidates.filter((w) => w !== anagram[1] && sorted(w) === sorted(anagram[1])).join(", ");
+  }
+
+  const scrabble = q.match(/scrabble score of "?([a-z]+)"?/);
+  if (scrabble) {
+    return String(scrabble[1].split("").reduce((sum, c) => sum + (SCRABBLE[c] || 0), 0));
+  }
+
   const fib = q.match(/(\d+)(?:st|nd|rd|th) number in the fibonacci/);
   if (fib) {
     return fibonacci(Number(fib[1])).toString();
@@ -50,6 +62,12 @@ export default function QueryProcessor(query: string): string {
 
   return "";
 }
+
+const SCRABBLE: Record<string, number> = {};
+const SCRABBLE_GROUPS: [string, number][] = [
+  ["aeioulnstr", 1], ["dg", 2], ["bcmp", 3], ["fhvwy", 4], ["k", 5], ["jx", 8], ["qz", 10],
+];
+SCRABBLE_GROUPS.forEach(([letters, score]) => letters.split("").forEach((c) => (SCRABBLE[c] = score)));
 
 const OPERATORS = ["to the power of", "multiplied by", "times", "divided by", "plus", "minus"];
 const PRECEDENCE = [["to the power of"], ["multiplied by", "times", "divided by"], ["plus", "minus"]];
